@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>RecordEmotion</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script>
+	
+	function printCalendar(TODAY, year, month){
+		
+		let nowYear = TODAY.getFullYear();
+		let nowMonth = TODAY.getMonth();
+		let nowDay = TODAY.getDate();
+		
+		year = (year != undefined)? year : nowYear;
+		month = (month != undefined)? month : nowMonth; 
+		
+		let monthNames = ["January", "February", "March", "April", "May", "June",
+			  "July", "August", "September", "October", "November", "December"];
+		
+		
+		let monthTitle = document.getElementById("monthTitle");
+		monthTitle.innerHTML = "<h3>" + monthNames[month] +"</h3>"
+		 
+		let currentDate = new Date(year, month, 1);
+		let currentDay = currentDate.getDay(); // 요일
+		
+		let lastDayOfMonth = new Date(year, month + 1, 0).getDate();
+		
+		let row = Math.ceil((currentDay + lastDayOfMonth)/7)
+		
+		let dNum = 1;
+		let calendarContent = "";
+		for(let i = 1; i <= row; i++){
+			calendarContent += "<tr>"
+				for(let j = 1; j <= 7; j++){
+					if( i == 1 && j < currentDay || dNum > lastDayOfMonth){
+						calendarContent  += "<td></td>"
+					}else {
+						if(year == nowYear && month == nowMonth && dNum == nowDay){
+							calendarContent += "<td id='today'>" + dNum + "</td>";
+						}else {
+							calendarContent += "<td>" + dNum + "</td>"
+						}
+						dNum++;
+					}
+				}
+			calendarContent += "</tr>"
+		}
+		
+		$("#calendarTable tbody").after(calendarContent)
+		//let calendarTable = document.getElementById("calendarTable");
+		//calendarTable.innerHTML += calendarContent;
+		
+		return currentDate;
+	}
+	
+	$(document).ready(function(){
+		const TODAY = new Date();
+		let currentDate = printCalendar(TODAY);
+		
+		// today버튼
+		$("#todayBtn").click(function(){
+			let currentDate = printCalendar(TODAY);
+		})
+		
+		
+		// prev버튼
+		$("#prevBtn").click(function(){
+			let currentDate = printCalendar(TODAY);
+		})
+		// next버튼
+		
+	})
+	
+	
+	
+	
+	</script>
+
+</head>
+<body>
+<div id="monthTitle"></div>
+<div id ="calendar">
+	<button id="todayBtn">TODAY</button>
+	<button id="prevBtn"><</button>
+	<button id="nextBtn">></button>		
+	<table id="calendarTable">
+		<thead>
+		<tr>
+			<th>MON</th>
+			<th>TUE</th>
+			<th>WED</th>
+			<th>THU</th>
+			<th>FRI</th>
+			<th>SAT</th>
+			<th>SUN</th>
+		</tr>
+		</thead>
+	</table>
+</div>
+</body>
+</html>

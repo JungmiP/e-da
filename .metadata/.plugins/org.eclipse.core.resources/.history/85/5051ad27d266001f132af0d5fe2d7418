@@ -1,0 +1,13 @@
+package com.recordEmotion.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.servlet.ModelAndView;
+
+@Controller
+public class RecordEmotionController {
+	public ModelAndView showMainPage() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("main.html");
+		return mav;
+	}
+}
