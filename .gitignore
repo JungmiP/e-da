@@ -388,4 +388,8 @@ poetry.toml
 # LSP config files
 pyrightconfig.json
 
+<<<<<<< HEAD
 # End of https://www.toptal.com/developers/gitignore/api/pycharm,eclipse,jupyternotebooks,python,java
+=======
+# End of https://www.toptal.com/developers/gitignore/api/pycharm,eclipse,jupyternotebooks,python,java
+>>>>>>> master
